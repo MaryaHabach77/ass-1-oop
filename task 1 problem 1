@@ -1,0 +1,81 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+
+string adjustPronouns(string text) {
+    string result = "";
+    string currentToken = "";
+
+    for (int index = 0; index <= text.length(); index++) {
+        char currentChar = text[index];
+
+        
+        if (isalpha(currentChar)) {
+            currentToken += currentChar;
+        } else {
+            // Substitute pronouns here
+            if (currentToken == "he") {
+                result += "he or she";
+            } else if (currentToken == "him") {
+                result += "him or her";
+            } else if (currentToken == "his") {
+                result += "his or her";
+            } else if (currentToken == "He") {
+                result += "He or She";
+            } else if (currentToken == "Him") {
+                result += "Him or Her";
+            } else if (currentToken == "His") {
+                result += "His or Her";
+            } else {
+                result += currentToken; 
+            }
+
+            
+           if (index < text.length()) {
+                result += currentChar;
+           }
+
+          
+            currentToken = "";
+        }
+    }
+
+    return result;
+}
+
+int main() {
+    int userChoice;
+    string userInput;
+    bool programRunning = true;
+
+    while (programRunning) {
+        cout << "Welcome to the Inclusive Pronoun Program!" << endl;
+        cout << "1. Convert masculine pronouns to inclusive pronouns" << endl;
+        cout << "2. Quit" << endl;
+        cout << "Please pick out an choice (1-2): ";
+        cin >> userChoice;
+        cin.ignore(); 
+
+        switch (userChoice) {
+            case 1:
+                cout << "Please enter a text to convert: ";
+                getline(cin, userInput);
+                cout << "Converted text: " << adjustPronouns(userInput) << endl;
+                break;
+
+            case 2:
+                cout << "Exiting the program..." << endl;
+                programRunning = false;
+                break;
+
+            default:
+                cout << "Invalid selection. Please enter (1-5) only." << endl;
+                break;
+        }
+
+        cout << endl; 
+    }
+
+    return 0;
+}
