@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+
+void pattern(int n, int i) {
+    if (n == 0) return; // Base case: no stars to print
+
+    // Recursive call to handle the upper half of the pattern
+    pattern(n / 2, i);
+
+    // Print spaces before the stars
+    for (int j = 0; j < i; j++) {
+        cout << " ";
+    }
+
+    // Print the stars
+    for (int j = 0; j < n; j++) {
+        cout << "* ";
+    }
+
+    // Move to the next line after printing stars
+    cout << endl;
+
+    // Recursive call to handle the lower half of the pattern
+    pattern(n / 2, i + n);
+}
+
+int main() {
+    int n;
+    cin>> n;
+    if (n > 0 && (n & (n - 1)) == 0) {
+        pattern(n, 0);} 
+    else {
+        cout << "Error: The value of n must be a power of 2." <<endl;
+    }
+   
+    return 0;
+}
