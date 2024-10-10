@@ -1,0 +1,95 @@
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+
+using namespace std;
+
+// Function to perform character by character comparison
+void compareCharByChar(const string& file1, const string& file2) {
+    ifstream f1(file1), f2(file2);
+    if (!f1.is_open() || !f2.is_open()) {
+        cout << "Error opening one of the files." << endl;
+        return;
+    }
+
+    char c1, c2;
+    int position = 0;
+    int line = 1;
+    
+    while (f1.get(c1) && f2.get(c2)) {
+        position++;
+        if (c1 != c2) {
+            cout << "Files differ at line " << line << " position " << position << endl;
+            cout << "File1: " << c1 << " File2: " << c2 << endl;
+            f1.close();
+            f2.close();
+            return;
+        }
+        if (c1 == '\n') line++;
+    }
+
+    if (f1.eof() && f2.eof()) {
+        cout << "Files are identical." << endl;
+    } else {
+        cout << "Files differ in size." << endl;
+    }
+
+    f1.close();
+    f2.close();
+}
+
+// Function to perform word by word comparison
+void compareWordByWord(const string& file1, const string& file2) {
+    ifstream f1(file1), f2(file2);
+    if (!f1.is_open() || !f2.is_open()) {
+        cout << "Error opening one of the files." << endl;
+        return;
+    }
+
+    string word1, word2;
+    int line = 1, wordPosition = 0;
+    
+    while (f1 >> word1 && f2 >> word2) {
+        wordPosition++;
+        if (word1 != word2) {
+            cout << "Files differ at line " << line << " word " << wordPosition << endl;
+            cout << "File1: " << word1 << " File2: " << word2 << endl;
+            f1.close();
+            f2.close();
+            return;
+        }
+    }
+
+    if (f1.eof() && f2.eof()) {
+        cout << "Files are identical." << endl;
+    } else {
+        cout << "Files differ in length or word content." << endl;
+    }
+
+    f1.close();
+    f2.close();
+}
+
+int main() {
+    string file1, file2;
+    int option;
+
+    cout << "Enter the name of the first file: ";
+    cin >> file1;
+    cout << "Enter the name of the second file: ";
+    cin >> file2;
+
+    cout << "Choose comparison type (1: Character by Character, 2: Word by Word): ";
+    cin >> option;
+
+    if (option == 1) {
+        compareCharByChar(file1, file2);
+    } else if (option == 2) {
+        compareWordByWord(file1, file2);
+    } else {
+        cout << "Invalid option." << endl;
+    }
+
+    return 0;
+}
