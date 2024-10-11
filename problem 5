@@ -5,39 +5,39 @@
 
 using namespace std;
 
-// Structure to hold player information
+// player info in here
 struct Player {
     string name;
     int score;
 };
 
-// Function to compare players based on their scores (for sorting)
+//to sort players scores 
 bool comparePlayers(const Player &a, const Player &b) {
     return a.score > b.score;
 }
 
-// Add a new player and score, keeping only the top 10 scores
+// + players and then sorts in descending form
 void addPlayer(vector<Player> &players, const string &name, int score) {
     Player newPlayer = {name, score};
     players.push_back(newPlayer);
 
-    // Sort players by score in descending order
+    
     sort(players.begin(), players.end(), comparePlayers);
 
-    // Keep only the top 10 scores
+    // keeping the top 10 scores
     if (players.size() > 10) {
-        players.pop_back(); // Remove the player with the lowest score
+        players.pop_back(); // Removes the player with the lowest score
     }
 }
 
-// Print the top 10 players and their scores
+// Printing
 void printTopPlayers(const vector<Player> &players) {
     for (const auto &player : players) {
         cout << player.name << " " << player.score << endl;
     }
 }
 
-// Find the highest score for a given player name
+// highest score
 void findPlayerScore(const vector<Player> &players, const string &name) {
     bool found = false;
     int highestScore = -1;
@@ -50,19 +50,19 @@ void findPlayerScore(const vector<Player> &players, const string &name) {
     }
 
     if (found) {
-        cout << "Highest score for " << name << ": " << highestScore << endl;
+        cout << "Highest score for is " << name << ": " << highestScore << endl;
     } else {
-        cout << "Player not found or not in the top 10." << endl;
+        cout << "this particular is Player not found or not in top 10." << endl;
     }
 }
 
-// Menu system
+// Menu 
 void displayMenu() {
-    cout << "\nMenu:\n";
-    cout << "1. Add a new player and score\n";
-    cout << "2. Print top 10 players and scores\n";
-    cout << "3. Find a player's highest score\n";
-    cout << "4. Exit\n";
+    cout << "\nMenu :\n";
+    cout << "1. Add a new player and score \n";
+    cout << "2. Print top 10 players and scores \n";
+    cout << "3. Find a player's highest score \n";
+    cout << "4. Exit \n";
 }
 
 int main() {
@@ -77,13 +77,13 @@ int main() {
         if (choice == 1) {
             string name;
             int score;
-            cout << "Enter player name: ";
+            cout << "Enter the players name: ";
             cin >> name;
-            cout << "Enter player score: ";
+            cout << "Enter the players score: ";
             cin >> score;
             addPlayer(players, name, score);
         } else if (choice == 2) {
-            cout << "Top 10 players:\n";
+            cout << "Top the 10 players:\n";
             printTopPlayers(players);
         } else if (choice == 3) {
             string name;
