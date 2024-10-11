@@ -50,7 +50,7 @@ int main() {
     bool programRunning = true;
 
     while (programRunning) {
-        cout << "Welcome to the Inclusive Pronoun Program!" << endl;
+        cout << "Welcome to my program!! choose a problem to work with: " << endl;
         cout << "1. Convert masculine pronouns to inclusive pronouns" << endl;
         cout << "2. Quit" << endl;
         cout << "Please pick out an choice (1-2): ";
