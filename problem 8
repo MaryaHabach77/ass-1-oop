@@ -1,37 +1,45 @@
 #include <iostream>
 using namespace std;
 
-void pattern(int n, int i) {
-    if (n == 0) return; // Base case: no stars to print
 
-    // Recursive call to handle the upper half of the pattern
-    pattern(n / 2, i);
+void pattern(int n, int indent) {
+    // if no stars left to print, stop the recursion
+    if (n == 0) return; 
 
-    // Print spaces before the stars
-    for (int j = 0; j < i; j++) {
-        cout << " ";
+    // print the upper half first
+    pattern(n / 2, indent);
+
+  
+    for (int i = 0; i < indent; i++) {
+        cout << " ";  // spaces
     }
 
-    // Print the stars
-    for (int j = 0; j < n; j++) {
-        cout << "* ";
+    // Printing the stars for the current row
+    for (int i = 0; i < n; i++) {
+        cout << "* ";  // Each star followed by a space
     }
 
-    // Move to the next line after printing stars
+    // Moving to the next line after printing the row
     cout << endl;
 
-    // Recursive call to handle the lower half of the pattern
-    pattern(n / 2, i + n);
+    //  print the lower half of the pattern
+    pattern(n / 2, indent + n);  // Increase
 }
 
 int main() {
     int n;
-    cin>> n;
+    
+    
+    cout << "Enter a number (must be a power of 2): ";
+    cin >> n;
+
+    //checking
     if (n > 0 && (n & (n - 1)) == 0) {
-        pattern(n, 0);} 
-    else {
-        cout << "Error: The value of n must be a power of 2." <<endl;
+        pattern(n, 0);  
+    } else {
+        
+        cout << "Error, The number should be a power of 2." << endl;
     }
-   
+
     return 0;
 }
