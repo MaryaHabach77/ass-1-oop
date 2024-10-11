@@ -14,7 +14,7 @@ string adjustPronouns(string text) {
         if (isalpha(currentChar)) {
             currentToken += currentChar;
         } else {
-            // Substitute pronouns here
+           
             if (currentToken == "he") {
                 result += "he or she";
             } else if (currentToken == "him") {
